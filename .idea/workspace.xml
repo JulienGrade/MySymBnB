@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6b929c6-cc7c-4672-8c1d-2dfde40c43a0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/AdController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ad/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ad/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
@@ -163,7 +167,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580317819087</updated>
-      <workItem from="1580317820362" duration="12181000" />
+      <workItem from="1580317820362" duration="12438000" />
     </task>
     <servers />
   </component>
