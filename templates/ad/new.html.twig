@@ -21,6 +21,9 @@
 {% block _ad_images_widget %}
     <p>Ici vous pouvez ajouter vos propres images !</p>
     {{ form_widget(form) }}
+
+    <input type="hidden" id="widgets-counter" value="0">
+
     <div class="form-group">
         <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
     </div>
@@ -57,8 +60,12 @@
 <script>
     // J'écoute les événements click sur le bouton add-image
     $('#add-image').click(function(){
-        // Je récupère le numéro des futurs champs que je vais créer
-        const index = $('#ad_images div.form-group').length;
+        // Je récupère le compte des widgets afin de gérer les index de mes images
+        // le + impose à val d'etre un integer et non pas un string permet l'addition du count
+        // évite que le compte soit 01 car id 01 ne fonctionnerait pas
+        const index = +$('#widgets-counter').val();
+
+
 
         // Je récupère le prototype des entrées, je remplace chaque __name__ par
         // la valeur de index g veut dire plusieurs fois
@@ -66,6 +73,9 @@
 
         // J'injecte ce code dans la div grace à append
         $('#ad_images').append(tmpl);
+
+        // On ajoute 1 a la valeur de notre widget counter apres la création d'un widget
+        $('#widgets-counter').val(index + 1);
 
         // Je gère le bouton supprimer
         handleDeleteButtons();
