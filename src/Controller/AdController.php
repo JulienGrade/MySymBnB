@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Form\AdType;
 use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,24 @@ class AdController extends AbstractController
     }
 
     /**
+     * Permet de créer une annonce
+     *
+     * @Route("/ads/new", name="ads_create")
+     * @return Response
+     */
+    public function create()
+    {
+
+        $ad = new Ad();
+        $form = $this->createForm(AdType::class, $ad);
+
+
+        return$this->render('ad/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * Permet d'afficher une seule annonce
      *
      * @param $slug
@@ -43,4 +62,6 @@ class AdController extends AbstractController
             'ad' => $ad
         ]);
     }
+
+
 }
