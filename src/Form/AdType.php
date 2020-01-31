@@ -21,22 +21,26 @@ class AdType extends AbstractType
      *
      * @param string $label
      * @param string $placeholder
+     * @param $options
      * @return array
      */
-    private function getConfiguration($label, $placeholder){
-        return [
+    private function getConfiguration($label, $placeholder, $options =[]){
+        return array_merge([
             'label' => $label,
             'attr' => [
                 'placeholder' => $placeholder
             ]
-        ];
+        ], $options);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', \Symfony\Component\Form\Extension\Core\Type\TextType::class, $this->getConfiguration("Titre", "Saisissez le titre de votre annonce..."))
-            ->add('slug', TextType::class, $this->getConfiguration("Adresse web", "Tapez l'adresse web (automatique)"))
+            ->add('slug', TextType::class, $this->getConfiguration("Adresse web", "Tapez l'adresse web (automatique)", [
+                    'required' => false
+                ])
+            )
             ->add('coverImage', UrlType::class, $this->getConfiguration("URL de l'image principale", "Donnez l'adresse d'une image qui donne vraiment envie"))
             ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Donnez une description globale de l'annonce"))
             ->add('content', TextareaType::class, $this->getConfiguration("Description détaillée", "Saisissez la descritpion de votre annonce"))
@@ -47,7 +51,8 @@ class AdType extends AbstractType
                 CollectionType::class,
                 [
                     'entry_type' => ImageType::class,
-                    'allow_add' => true
+                    'allow_add' => true,
+                    'allow_delete' => true
                 ]
             )
         ;
