@@ -18,12 +18,17 @@ div.carousel-caption {
 }
 
 .avatar {
-    max-width: 8em !important;
-    max-height: 8em !important;
-    border-radius: 50% !important;
+    max-width: 8em;
+    max-height: 8em;
+    border-radius: 50%;
 }
 
 .avatar-medium {
     max-width: 4em;
     max-height: 4em;
+}
+
+.avatar-mini {
+    max-width: 2em;
+    max-height: 2em;
 }

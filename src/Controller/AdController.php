@@ -55,6 +55,9 @@ class AdController extends AbstractController
                 $manager->persist($image);
             }
 
+            // Ici on fait le lien entre l'utilisateur et l'annonce crée
+            $ad->setAuthor($this->getUser());
+
             //$manager = $this->getDoctrine()->getManager();
 
             $manager->persist($ad);
