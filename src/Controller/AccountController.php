@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AccountType;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -78,6 +79,41 @@ class AccountController extends AbstractController
 
         return $this->render('account/registration.html.twig', [
            'form'=> $form->createView()
+        ]);
+    }
+
+    /**
+     * Permet d'afficher et traiter le formulaire de modification de profil
+     *
+     * @Route("/account/profile", name="account_profile")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function profile(Request $request, ObjectManager $manager)
+    {
+        // Ici on récupère l'utilisateur connecté
+        $user = $this->getUser();
+
+        // On crée le formulaire en précisant le type ici account
+        $form = $this->createForm(AccountType::class, $user);
+
+        // On demande au formulaire de gérer la requete
+        $form->handleRequest($request);
+
+        // Ici on enregistre en bdd apres conditions
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Les modifications de votre profil ont bien été enregistrées !"
+            );
+        }
+
+        return $this->render('account/profile.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
