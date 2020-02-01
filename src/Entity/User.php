@@ -87,6 +87,13 @@ class User implements UserInterface
     private $ads;
 
     /**
+     * Permet de creer un nom complet prenom+nom
+     */
+    public function getFullName(){
+        return "{$this->firstName} {$this->lastName}";
+    }
+
+    /**
      * Permet d'initialiser le slug
      *
      * @ORM\PrePersist

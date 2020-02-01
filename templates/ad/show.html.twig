@@ -51,37 +51,17 @@
             </div>
         </div>
         <div class="col">
-            <div class="row">
-                <div class="col-4">
-                    <img src="http://placehold.it/64x64" alt="Avatar de Stephane">
+            {% set a = ad.author %}
+            <div class="row align-items-center">
+                <div class="col-5">
+                    <img src="{{ a.picture }}" alt="Avatar de {{a.fullName }}" class="avatar avatar-medium">
                 </div>
                 <div class="col">
-                    <h3>Stephane Plazza</h3>
-                    <span class="badge badge-primary">3 annonces</span>
+                    <h3>{{a.fullName }}</h3>
+                    <span class="badge badge-primary">{{ a.ads | length }} annonces</span>
                 </div>
-                <p>Horum adventum praedocti speculationibus fidis rectores
-                    militum tessera data sollemni armatos omnes celeri eduxere
-                    procursu et agiliter praeterito Calycadni fluminis ponte,
-                    cuius undarum magnitudo murorum adluit turres, in speciem
-                    locavere pugnandi. neque tamen exiluit quisquam nec permissus
-                    est congredi. formidabatur enim flagrans vesania manus et superior
-                    numero et ruitura sine respectu salutis in ferrum.
-                </p>
-                <p>Horum adventum praedocti speculationibus fidis rectores
-                    militum tessera data sollemni armatos omnes celeri eduxere
-                    procursu et agiliter praeterito Calycadni fluminis ponte,
-                    cuius undarum magnitudo murorum adluit turres, in speciem
-                    locavere pugnandi. neque tamen exiluit quisquam nec permissus
-                    est congredi. formidabatur enim flagrans vesania manus et superior
-                    numero et ruitura sine respectu salutis in ferrum.
-                </p>
-                <p>Horum adventum praedocti speculationibus fidis rectores
-                    militum tessera data sollemni armatos omnes celeri eduxere
-                    procursu et agiliter praeterito Calycadni fluminis ponte,
-                    cuius undarum magnitudo murorum adluit turres, in speciem
-                    locavere pugnandi. neque tamen exiluit quisquam nec permissus
-                    est congredi. formidabatur enim flagrans vesania manus et superior
-                    numero et ruitura sine respectu salutis in ferrum.
+                <p>
+                    {{ a.description | raw }}
                 </p>
             </div>
         </div>
