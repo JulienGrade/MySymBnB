@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Booking
 {
@@ -30,11 +32,15 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Assert\Date(message="Attention, la date d'arrivée doit être au bon format !")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Assert\Date(message="Attention, la date de départ doit être au bon format !")
      */
     private $endDate;
 
@@ -52,6 +58,32 @@ class Booking
      * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
+
+    /**
+     * Ici on gère la  date de création et le montant total de la reservation
+     *
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+       if(empty($this->createdAt)) {
+           $this->createdAt = new \DateTime();
+       }
+
+       if(empty($this->amount)) {
+           // Multiplier le prix de l'annonce par le nombre de jour
+           $this->amount =$this->ad->getPrice() * $this->getDuration();
+       }
+    }
+
+    /**
+     * Ici on calcul la durée de la reservation
+     */
+    public function getDuration()
+    {
+        $diff =$this->endDate->diff($this->startDate);
+        return $diff->days;
+    }
 
     public function getId(): ?int
     {
