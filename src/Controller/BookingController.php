@@ -34,15 +34,25 @@ class BookingController extends AbstractController
 
             // Ici on le lie à la reservation
             $booking->setBooker($user)
-            ->setAd($ad);
+                    ->setAd($ad);
 
-            // La date de création et le montant se gère dans l'entity directement
-            $manager->persist($booking);
-            $manager->flush();
+            // Si les dates ne sont pas disponibles, message d'erreur
 
-            return $this->redirectToRoute('booking_show', ['id' => $booking->getId(),
-                'withAlert' => true]);
+            if(!$booking->isBookableDate()){
+                $this->addFlash(
+                    'warning',
+                    "Les dates choisies sont malheureusement déjà prises"
+                );
+            } else {
+                // Sinon enregistrement et redirection
 
+                // La date de création et le montant se gère dans l'entity Booking directement
+                $manager->persist($booking);
+                $manager->flush();
+
+                return $this->redirectToRoute('booking_show', ['id' => $booking->getId(),
+                    'withAlert' => true]);
+            }
         }
 
         return $this->render('booking/book.html.twig', [

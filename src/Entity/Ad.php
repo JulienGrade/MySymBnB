@@ -104,6 +104,38 @@ class Ad
        }
     }
 
+    /**
+     * Permet d'obtenir un tableau des jours qui ne sont pas disponibles pour cette annonce
+     *
+     * @return array Un tableau d'objets DateTime représentant les jours d'occupation
+     */
+    public function getNotAvailableDays()
+    {
+        $notAvailableDays = [];
+
+        foreach ($this->bookings as $booking) {
+            // Calculer les jours qui se trouvent entre la date d'arrivée et de départ
+            $resultat = range(
+                // On récupère les timestamp de chaque données et on l'affiche avec un ecart de une journée 24*60*60
+                $booking->getStartDate()->getTimestamp(),
+                $booking->getEndDate()->getTimestamp(),
+                24 * 60 * 60
+            );
+
+            // Ici on transforme tous les jours de $resultat stockés en timestamp en un tableau de date
+            // On crée un tableau grace à array_map afin de récupérer le timestamp
+            //$dayTimeStamp et transformer le tableau $resultat grace a ca
+            $days = array_map(function($dayTimeStamp){
+                return new \DateTime(date('Y-m-d', $dayTimeStamp));
+            }, $resultat);
+
+            // Ici on ajoute le résultat $days à notre tableau notAvailabledays
+            $notAvailableDays = array_merge($notAvailableDays, $days);
+
+        }
+        return $notAvailableDays;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
