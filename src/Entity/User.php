@@ -255,7 +255,16 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        // On transforme les roles en tableau de role grace a toArray
+        // puis en tableau de chaine de caractere grace a map
+        $roles = $this->userRoles->map(function($role){
+           return $role->getTitle();
+        })->toArray();
+
+        // Ici on ajoute le role user a tous les utilisateurs
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
     }
 
     /**
