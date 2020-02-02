@@ -27,12 +27,13 @@
                     {{ form_row(form.endDate) }}
                 </div>
             </div>
-        </div>
-        <h4>Montant du séjour : <span id="amount">...</span> &euro;</h4>
-        <p></p><span id="days">0</span> nuit(s) à {{ ad.price }} / nuit</p>
+            <h4>Montant du séjour : <span id="amount">...</span> &euro;</h4>
+            <p></p><span id="days">0</span> nuit(s) à {{ ad.price }} / nuit</p>
 
-        <h2>Vous avez un commentaire ?</h2>
-        {{ form_row(form.comment) }}
+            <h4 class="mt-3">Vous avez un commentaire ?</h4>
+            {{ form_row(form.comment) }}
+        </div>
+
 
         <h2>Vous avez terminé !</h2>
         <p>Vacances de rêve ? Hébergement pour un déplacement professionel ?
@@ -59,6 +60,35 @@
                 ],
                 startDate: new Date()
             });
+
+            $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
         })
+
+        function calculateAmount()
+        {
+            // On récupère les dates val permettant d'avoir la valeur puis on transforme avec replace et regex
+            // le format ensuite $3=annee $2=mois $1=jours
+            const endDate   = new Date($('#booking_endDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
+            // 18/09/2018
+            // (\d+)\/(\d+)\/(\d{4})
+            // 2018-09-18
+            const startDate = new Date($('#booking_startDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
+
+            // On verifie que les dates soient conformes et présentes
+            if(startDate && endDate && startDate < endDate){
+                // on calcul l'interval avec getTime methode javascript en timestamp
+                const interval = endDate.getTime() - startDate.getTime();
+
+                // On convertit le timestamp en jours
+                const DAY_TIME = 24 * 60 * 60 *1000;
+                const days = interval / DAY_TIME;
+
+                // On calcul le montant
+                const amount = days * {{ ad.price }};
+
+                $('#days').text(days);
+                $('#amount').text(amount.toLocaleString('fr-FR'));
+            }
+        }
     </script>
 {% endblock %}
