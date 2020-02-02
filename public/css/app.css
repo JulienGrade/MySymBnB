@@ -37,3 +37,7 @@ div.carousel-caption {
     color: #FF5A2B !important;
     background-color: #ffa88e !important;
 }
+
+span.rating i{
+   color: goldenrod;
+}

@@ -1,0 +1,10 @@
+<span class="rating">
+    {% for i in 1..5 %}
+        <!--Ici on boucle i prendra la note de 1 puis 2 puis 3 jusqu'a atteindre la note-->
+        {% if i <= rating %}
+            <i class="fas fa-star"></i>
+        {% else %}
+            <i class="far fa-star"></i>
+        {% endif %}
+    {% endfor %}
+</span>

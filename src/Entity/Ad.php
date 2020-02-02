@@ -110,6 +110,22 @@ class Ad
        }
     }
 
+    public function getAvgRatings()
+    {
+        // Calculer la somme  des notations
+        // On réduit le tableau commentaires a une seule valeur, toArray fait que
+        // array_reduce s'adapte au fait que ce soit un array_collection
+        $sum = array_reduce($this->comments->toarray(), function($total, $comment){
+            return $total + $comment->getRating();
+        }, 0);
+
+        // Faire la division pour avoir la moyenne si le compte des commentaires est superieur à 0
+        if(count($this->comments) > 0) return $sum / count($this->comments);
+
+        // retourner la valeur 0 si pas de commentaires
+        return 0;
+    }
+
     /**
      * Permet d'obtenir un tableau des jours qui ne sont pas disponibles pour cette annonce
      *
