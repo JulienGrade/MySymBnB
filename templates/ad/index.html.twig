@@ -4,9 +4,9 @@
 
 {% block body %}
     <div class="container">
-        <div class="mt-5">
-            <h1>Voici les annonces actuellement en ligne !</h1>
-        </div>
+
+        <h1 class="my-5">Voici les annonces actuellement en ligne !</h1>
+
         <div class="row mt-4">
             {% for ad in ads %}
                 {% include 'ad/_ad.html.twig' %}

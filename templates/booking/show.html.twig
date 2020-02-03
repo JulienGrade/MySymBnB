@@ -6,7 +6,7 @@
     {% set ad = booking.ad %}
     {% set author = ad.author %}
     <div class="container">
-        <h1>Votre réservation (n°{{ booking.id }})</h1>
+        <h1 class="my-5">Votre réservation (n°{{ booking.id }})</h1>
 
         {% if app.request.query.get('withAlert') %}
             <div class="alert alert-success">
@@ -42,7 +42,7 @@
                         <dt class="col-md-4">Nombre de nuits</dt>
                         <dt class="col-md-8">{{ booking.duration }}</dt>
                         <dt class="col-md-4">Montant total</dt>
-                        <dt class="col-md-8">{{ booking.amount }} &euro;</dt>
+                        <dt class="col-md-8">{{ booking.amount | number_format(2, ', ', ' ') }} &euro;</dt>
                         <dt class="col-md-4">Commentaire</dt>
                         <dt class="col-md-8">{{ booking.comment | default('Aucun commentaire') }}</dt>
                     </dl>
