@@ -60,7 +60,7 @@ class AdminAdController extends AbstractController
     /**
      * Permet de supprimer une annonce
      *
-     * @Route("/admin/ads{id}/delete", name="admin_ads_delete")
+     * @Route("/admin/ads/{id}/delete", name="admin_ads_delete")
      *
      * @param Ad $ad
      * @param ObjectManager $manager
