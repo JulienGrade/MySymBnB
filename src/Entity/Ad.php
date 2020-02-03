@@ -110,6 +110,11 @@ class Ad
        }
     }
 
+    /**
+     * Permet d'obtenir la moyenne globale des notes pour cette semaine
+     *
+     * @return float|int
+     */
     public function getAvgRatings()
     {
         // Calculer la somme  des notations
@@ -124,6 +129,21 @@ class Ad
 
         // retourner la valeur 0 si pas de commentaires
         return 0;
+    }
+
+    /**
+     * Permet de récupérer le commentaire d'un auteur par rapport à une annonce
+     *
+     * @param User $author
+     * @return Comment|null
+     */
+    public function getCommentFromAuthor(User $author)
+    {
+        foreach ($this->comments as $comment) {
+            if($comment->getAuthor() === $author) return $comment;
+        }
+
+        return null;
     }
 
     /**
