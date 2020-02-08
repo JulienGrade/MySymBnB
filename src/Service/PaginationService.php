@@ -3,18 +3,28 @@
 namespace App\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Twig\Environment;
 
 class PaginationService {
    private $entityClass;
    private $limit = 10;
    private $currentPage = 1;
    private $manager;
+   private $twig;
 
    // Grace au constructor on a accès au manager de doctrine
-   public function __construct(ObjectManager $manager)
+   public function __construct(ObjectManager $manager, Environment $twig)
    {
        $this->manager = $manager;
+       $this->twig = $twig;
    }
+
+   public function display(){
+       $this->twig->display('admin/partials/pagination.html.twig', [
+
+       ]);
+   }
+
 
    public function getPages(){
         // Connaitre le total des enregistrements de la table

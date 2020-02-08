@@ -33,7 +33,7 @@
                         <p>Les informations que vous avez fournies ne sont pas correctes</p>
                     </div>
                 {% endif %}
-                <form method="post">
+                <form method="post" action="{{ path('admin_booking_index') }}">
                     <div class="form-group">
                         <label for="_username">Email</label>
                         <input class="form-control" placeholder="Adresse email..." type="text"

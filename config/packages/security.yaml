@@ -28,7 +28,7 @@ security:
                 path: admin_account_logout
                 target: homepage
         main:
-            anonymous: lazy
+            anonymous: true
 
             provider: in_database
 
