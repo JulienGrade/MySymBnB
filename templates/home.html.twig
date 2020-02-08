@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block body %}
+
     <div class="container mt-4">
         <div class="jumbotron">
             <h1 class="display-3">Bienvenue sur MySymBnB !</h1>
@@ -16,113 +17,38 @@
             <hr class="my-4">
             <p>Vous allez voyager? Ou effectuer un déplacement professionel? Si vous cherchez à vous sentir chez vous lors de ce projet voyage, vous êtes au bon endroit...</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Voir nos annonces</a>
+                <a class="btn btn-primary btn-lg" href="{{ path('ads_index') }}" role="button">Voir nos annonces</a>
             </p>
         </div>
     
         <h2 class="h1 my-5">Nos appartements stars</h2>
         <div class="row mt-5">
-            <div class="col-md-4">
-                <div class="card bg-light mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>49&euro; /nuit</strong><br>
-                        <small>Pas encore noté</small>
-                    </div>
-
-                    <img src="http://placehold.it/1000x400" alt="Image de l'appartement" class="w-50 d-block">
-
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            Superbe Appartement
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            dolorum eos consequuntur aliquid corporis asperiores, impedit natus, neque ea dolores
-                            nam est reprehenderit voluptatum nobis excepturi iste doloremque optio. Consequatur.
-                        </p>
-                        <a href="#" class="btn btn-primary">En savoir plus !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-light mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>49&euro; /nuit</strong><br>
-                        <small>Pas encore noté</small>
-                    </div>
-
-                    <img src="http://placehold.it/1000x400" alt="Image de l'appartement" class="w-50 d-block">
-
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            Superbe Appartement
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            dolorum eos consequuntur aliquid corporis asperiores, impedit natus, neque ea dolores
-                            nam est reprehenderit voluptatum nobis excepturi iste doloremque optio. Consequatur.
-                        </p>
-                        <a href="#" class="btn btn-primary">En savoir plus !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-light mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>49&euro; /nuit</strong><br>
-                        <small>Pas encore noté</small>
-                    </div>
-
-                    <img src="http://placehold.it/1000x400" alt="Image de l'appartement" class="w-50 d-block">
-
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            Superbe Appartement
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            dolorum eos consequuntur aliquid corporis asperiores, impedit natus, neque ea dolores
-                            nam est reprehenderit voluptatum nobis excepturi iste doloremque optio. Consequatur.
-                        </p>
-                        <a href="#" class="btn btn-primary">En savoir plus !</a>
-                    </div>
-                </div>
-            </div>
+            {% for data in ads %}
+                {% include 'ad/_ad.html.twig' with {'ad': data.annonce} %}
+            {% endfor %}
         </div>
         <h2 class="h1 my-5">Nos propriétaires stars</h2>
+
         <div class="row mt-3">
+            {% for data in users %}
             <div class="col">
                 <div class="card border-primary mb-3">
                     <div class="card-body">
-                        <h4 class="card-title">Julien Grade</h4>
+                        <h4 class="card-title">{{ data.user.fullName }}</h4>
 
                         <hr>
 
                         <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="Avatar de Julien Grade" class="float-left mr-3">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex sit laboriosam illum, exercitationem tempora ratione fuga voluptas accusantium error necessitatibus quo voluptate temporibus ducimus non optio corporis excepturi! Quia, placeat.
-
+                            <img src="{{data.user.picture}}" alt="{{ data.user.fullName }}" class="float-left mr-3">
+                            <p>
+                                {{ data.user.introduction }}
                             </p>
-                            <a href="#" class="btn btn-primary float-right">En savoir plus!</a>
+                            <a href="{{path('user_show', {'slug': data.user.slug})}}" class="btn btn-primary float-right">En savoir plus!</a>
                         </div>
                     </div>                    
                 </div>
             </div>
-            <div class="col">
-                <div class="card border-primary mb-3">
-                    <div class="card-body">
-                        <h4 class="card-title">Stephane Plazza</h4>
-
-                        <hr>
-
-                        <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="Avatar de Julien Grade" class="float-left mr-3">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex sit laboriosam illum, exercitationem tempora ratione fuga voluptas accusantium error necessitatibus quo voluptate temporibus ducimus non optio corporis excepturi! Quia, placeat.
-
-                            </p>
-                            <a href="#" class="btn btn-primary float-right">En savoir plus!</a>
-                        </div>
-                    </div>                    
-                </div>
-            </div>   
-            
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
