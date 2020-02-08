@@ -19,7 +19,7 @@ class AdminCommentController extends AbstractController
     /**
      * @Route("/admin/comments/{page<\d+>?1}", name="admin_comment_index")
      * @param CommentRepository $repo
-     * @param $page
+     * @param int $page
      * @param PaginationService $pagination
      * @return Response
      */

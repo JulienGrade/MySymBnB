@@ -28,6 +28,7 @@ class AdminAdController extends AbstractController
                     ->setPage($page);
 
 
+
         return $this->render('admin/ad/index.html.twig', [
             'pagination' => $pagination
         ]);

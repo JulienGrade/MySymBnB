@@ -17,7 +17,7 @@ class AdminBookingController extends AbstractController
     /**
      * @Route("/admin/bookings/{page<\d+>?1}", name="admin_booking_index")
      * @param BookingRepository $repo
-     * @param $page
+     * @param int $page
      * @param PaginationService $pagination
      * @return Response
      */

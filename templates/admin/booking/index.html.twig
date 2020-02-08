@@ -29,7 +29,7 @@
                     </td>
                     <td>{{ booking.ad.title }}</td>
                     <td class="text-center">{{ booking.duration }}</td>
-                    <td class="text-center">{{ booking.amount | number_format(2, ', ', ' ') }}</td>
+                    <td class="text-center">{{ booking.amount | number_format(2, ', ', ' ') }}&euro;</td>
                     <td>
                         <a href="{{ path('admin_booking_edit', {'id': booking.id}) }}" class="btn btn-primary">
                             Éditer
@@ -45,6 +45,6 @@
             </tbody>
 
         </table>
-       {% include 'admin/partials/pagination.html.twig' with {'route': 'admin_booking_index'} %}
+        {{ pagination.display() }}
     </div>
 {% endblock %}
