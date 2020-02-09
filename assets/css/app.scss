@@ -8,18 +8,20 @@ div.ad-title{
     padding: 2em;
     background-size: cover;
     background-position: center center;
+
+    h1, p {
+        color: white;
+        text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+    }
+
+    .btn{
+        margin-top: 2em;
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
 }
 
-div.ad-title .btn{
-    margin-top: 2em;
-    font-size: 1.5em;
-    line-height: 1.5em;
-}
 
-div.ad-title h1, div.ad-title p {
-    color: white;
-    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
-}
 
 div.carousel-caption {
     text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
@@ -29,21 +31,21 @@ div.carousel-caption {
     max-width: 8em;
     max-height: 8em;
     border-radius: 50%;
-}
 
-.avatar-medium {
-    max-width: 4em;
-    max-height: 4em;
-}
+    &.avatar-medium {
+        max-width: 4em;
+        max-height: 4em;
+    }
 
-.avatar-mini {
-    max-width: 2em;
-    max-height: 2em;
-}
+    &.avatar-mini {
+        max-width: 2em;
+        max-height: 2em;
+    }
 
-.avatar-micro {
-    max-width: 1.5em;
-    max-height: 1.5em;
+    &.avatar-micro {
+        max-width: 1.5em;
+        max-height: 1.5em;
+    }
 }
 
 .datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
@@ -55,11 +57,14 @@ span.rating i{
    color: goldenrod;
 }
 
-.alert a {
-    text-decoration: none;
+.alert {
+    a {
+        text-decoration: none;
+    }
+
+    .btn {
+        color: white;
+    }
 }
 
-.alert .btn {
-    color: white;
-}
 
